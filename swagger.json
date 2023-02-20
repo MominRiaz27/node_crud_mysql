@@ -1,0 +1,150 @@
+
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0", 
+    "title": "My Node Project CRUD",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Customers",
+      "description": "API for Customers in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+
+    "paths": {
+      "/api/get": {
+        "get": {
+          "tags": ["Customers"],
+          "summary": "Get all customers in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Customers"
+              }
+            }
+          }
+        }
+      },
+      "/api/post": {
+        "post": {
+          "tags": ["Customers"],
+          "summary":"Add a new customer",
+          "description": "Create new Customers in system",
+          "parameters": [
+            {
+                "name": "customer",
+                "in": "body",
+                "description": "Customer that we want to create",
+                "schema": {
+                  "$ref": "#/definitions/Customer"
+                }
+              }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/Customer"
+              }
+            }
+          }
+        }
+    },
+    "/api/put/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of Customer that we want to find",
+          "type": "integer"
+        }
+      ],
+      "put": {
+        "summary": "Update customer with give ID",
+        "tags": ["Customers"],
+        "parameters": [
+          {
+            "name": "customer",
+            "in": "body",
+            "description": "Customer with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Customers"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer is updated",
+            "schema": {
+              "$ref": "#/definitions/Customers"
+            }
+          }
+        }
+      }
+      
+    },
+    "/api/delete/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of Customer that we want to delete",
+          "type": "integer"
+        }
+      ],
+      "delete": {
+        "summary": "Delete customer with give ID",
+        "tags": ["Customers"],
+        "responses": {
+          "200": {
+            "description": "Customer is Deleted"
+            
+          }
+        }
+      }
+      
+    }
+    },
+    "definitions": {
+      "Customers": {
+        "required": ["Email", "Password", "Number", "Date", "CNIC"],
+        "properties": {
+          "Email": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          },
+          "Number": {
+            "type": "string"
+          },
+          "Date": {
+            "type": "string"
+          },
+          "CNIC": {
+            "type": "string"
+          }
+        }
+      }
+      
+    }
+
+
+    
+  }
